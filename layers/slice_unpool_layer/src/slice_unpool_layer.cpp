@@ -2,6 +2,7 @@
 #include <TH/TH.h>
 #include <math.h>
 #include <stdio.h>
+#include "slice_unpool_layer.h"
 
 
 //-------- Max Unpooling Functions
@@ -78,6 +79,7 @@ int slice_unpool_backward(THFloatTensor *top_grad_tensor, THIntTensor *slice_idx
 
 
 
-
-
-
+PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
+  m.def("slice_unpool_forward", &slice_unpool_forward, "slice_unpool_forward");
+  m.def("slice_unpool_backward", &slice_unpool_backward, "slice_unpool_backward");
+}

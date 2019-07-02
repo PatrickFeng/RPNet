@@ -27,8 +27,8 @@ anno_paths = [os.path.join(Stanford3dDataset_DIR, p) for p in anno_paths]
 output_folder = args.output_folder
 
 
-if not os.path.exists(OUTPUT_DIR):
-    os.mkdir(OUTPUT_DIR)
+#if not os.path.exists(OUTPUT_DIR):
+#    os.mkdir(OUTPUT_DIR)
 
 if not os.path.exists(output_folder):
     os.mkdir(output_folder)

@@ -88,7 +88,7 @@ if not os.path.exists(args.results_dir):
 #-- helper func for rnn units
 def repackage_hidden(h):
     """Wraps hidden states in new Variables, to detach them from their history."""
-    if type(h) == Variable:
+    if isinstance(h, Variable):
         return Variable(h.data)
     else:
         return tuple(repackage_hidden(v) for v in h)
@@ -212,8 +212,9 @@ for epoch in range(start_epoch, epochs):
     
         # measure accuracy and record loss
         prec1 = accuracy(output_reshaped.data, target_var.data, topk=(1, ))
-        prec1[0] = prec1[0].cpu().numpy()[0]
-        losses.update(loss.data[0], inputs.shape[0])
+        prec1[0] = prec1[0].cpu().numpy()
+        #losses.update(loss.data[0], inputs.shape[0])
+        losses.update(loss.data, inputs.shape[0])
         top1.update(prec1[0], inputs.shape[0])
 
 
@@ -286,8 +287,9 @@ for epoch in range(start_epoch, epochs):
         loss = criterion(output_reshaped, target_var)
         # measure accuracy and record loss
         prec1 = accuracy(output_reshaped.data, target_var.data, topk=(1, ))
-        prec1[0] = prec1[0].cpu().numpy()[0]
-        losses.update(loss.data[0], inputs.shape[0])
+        prec1[0] = prec1[0].cpu().numpy()
+        #losses.update(loss.data[0], inputs.shape[0])
+        losses.update(loss.data, inputs.shape[0])
         top1.update(prec1[0], inputs.shape[0])
         
         # measure global and average accuracy
@@ -345,7 +347,9 @@ for epoch in range(start_epoch, epochs):
         f.write( 'Epoch {} Val Acc {:.3f} Avg Acc {:.3f}\t '
                 .format(epoch, top1.avg,  avg_acc))
 
-    execfile('eval_iou_accuracy.py')
+    #execfile('eval_iou_accuracy.py')
+    with open('eval_iou_accuracy.py','r') as f:
+        exec(f.read())
     
     prec1 = top1.avg
     

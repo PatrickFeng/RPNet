@@ -109,7 +109,7 @@ for file in data_label_files:
     elif split == 'test' and args.area in file:
         split_list.append( file )
 
-print "{}/{} files selected".format( len(split_list), len(data_label_files) )
+print('{}/{} files selected'.format( len(split_list), len(data_label_files) ))
 data_label_files = split_list
 
 sample_cnt = 0
@@ -125,4 +125,4 @@ for i, data_label_filename in enumerate(data_label_files):
     insert_batch(data, label, i == len(data_label_files)-1)
 
 fout_room.close()
-print("Total samples: {0}".format(sample_cnt))
+print('Total samples: {0}'.format(sample_cnt))

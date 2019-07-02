@@ -2,6 +2,7 @@
 #include <TH/TH.h>
 #include <math.h>
 #include <stdio.h>
+#include "slice_pool_layer.h"
 
 
 //-------- Max Pooling Functions
@@ -168,6 +169,13 @@ int slice_pool_avg_backward(THFloatTensor *top_grad_tensor, THIntTensor *slice_i
 
 
 
+
+PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
+  m.def("slice_pool_max_forward", &slice_pool_max_forward, "slice_pool_max_forward");
+  m.def("slice_pool_max_backward", &slice_pool_max_backward, "slice_pool_max_backward");
+  m.def("slice_pool_avg_forward", &slice_pool_avg_forward, "slice_pool_avg_forward");
+  m.def("slice_pool_avg_backward", &slice_pool_avg_backward, "slice_pool_avg_backward");
+}
 
 
 

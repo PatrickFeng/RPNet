@@ -31,7 +31,7 @@ for i in range(num_room):
     gt_label = load_obj( gt_filenames[i] )[:,-1]
     assert len(pred_label) == len(gt_label)
     print(gt_label.shape)
-    for j in xrange(gt_label.shape[0]):
+    for j in range(gt_label.shape[0]):
         gt_l = int(gt_label[j])
         pred_l = int(pred_label[j])
         gt_classes[gt_l] += 1
@@ -53,7 +53,7 @@ for tp, gt in zip(true_positive_classes, gt_classes):
 meanAcc /= 13
 print('Mean accuracy: {0}'.format(  meanAcc    ) )
 
-print 'IoU:'
+print('IoU:')
 iou_list = []
 for i in range(13):
     iou = true_positive_classes[i]/float(gt_classes[i]+positive_classes[i]-true_positive_classes[i]) 

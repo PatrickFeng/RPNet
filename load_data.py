@@ -50,7 +50,7 @@ DATA_DIR = './data/'
 TRAIN_DIR = os.path.join(DATA_DIR, 'indoor3d_sem_seg_hdf5_data_{}_{}m_{}s_train/'.format(area, block_size, stride))
 TEST_DIR = os.path.join(DATA_DIR, 'indoor3d_sem_seg_hdf5_data_{}_{}m_{}s_test/'.format( area, block_size, block_size ))
 
-print("loading raw data...")
+print('loading raw data...')
 train_files = glob.glob(TRAIN_DIR + '*.h5')
 test_files = glob.glob(TEST_DIR + '*.h5')
 
@@ -75,8 +75,8 @@ for filename in test_files:
 test_data = np.concatenate(test_data, 0)
 test_label = np.concatenate(test_label, 0)
 
-print "training set: ", (train_data.shape, train_label.shape)
-print "testing set: ", (test_data.shape, test_label.shape)
+print('training set: ', (train_data.shape, train_label.shape))
+print('testing set: ', (test_data.shape, test_label.shape))
 
 Z_MIN, Z_MAX = min( train_data[:,:,2].min(), test_data[:,:,2].min() ), max( train_data[:,:,2].max(), test_data[:,:,2].max() )
 
@@ -84,12 +84,12 @@ def iterate_data(batchsize, resolution, train_flag = True, require_ori_data=Fals
     if train_flag:
         data_all = train_data
         label_all = train_label
-        indices = range(data_all.shape[0])
+        indices = list(range(data_all.shape[0]))
         np.random.shuffle(indices)
     else:
         data_all = test_data
         label_all = test_label
-        indices = range(data_all.shape[0])
+        indices = list(range(data_all.shape[0]))
 
     file_size = data_all.shape[0]
     num_batches = int(math.floor( file_size / float(batchsize) ))

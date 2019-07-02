@@ -661,7 +661,7 @@ class PlyElement(object):
         '''
         self._data = _np.empty(self.count, dtype=self.dtype(byte_order))
 
-        for k in _range(self.count):
+        for k in range(self.count):
             for prop in self.properties:
                 try:
                     self._data[prop.name][k] = \
